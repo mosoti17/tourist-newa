@@ -21,11 +21,24 @@ build/
 # Local configuration file
 local.properties
 
-# Log files
-*.log
 
 # Android Studio generated files and folders
 captures/
 .externalNativeBuild/
 .cxx/
+
 *.iml
+*.log
+.gradle
+/local.properties
+.idea/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+/app/prodFlavor
+/app/stagingFlavor
+/.idea/misc.xml
+report.xml
+/buildSrc/build/
+/keystore.properties

@@ -2,7 +2,7 @@ package com.mogaka.touristnews.data
 
 import com.squareup.moshi.Json
 
-data class FeedResponse(
+data class ApiResponse<T>(
     @Json(name = "page")
     var page: Int,
     @Json(name = "per_page")
@@ -12,6 +12,6 @@ data class FeedResponse(
     @Json(name = "total_pages")
     var totalPages: Int,
     @Json(name = "data")
-    var data: List<News> = listOf()
+    var data: List<T> = listOf()
 
 )

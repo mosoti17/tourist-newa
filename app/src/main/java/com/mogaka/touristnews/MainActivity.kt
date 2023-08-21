@@ -10,14 +10,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.mogaka.touristnews.ui.NewsCard
 import com.mogaka.touristnews.ui.NewsViewModel
+import com.mogaka.touristnews.ui.TouristProfileCard
+import com.mogaka.touristnews.ui.TouristViewModel
 import com.mogaka.touristnews.ui.theme.TouristNewsTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val newsViewModel by viewModels<NewsViewModel>()
+    private val touristViewModel by viewModels<TouristViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -27,12 +29,20 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val newsArticles = newsViewModel.newsPager.collectAsLazyPagingItems()
+                   // TabLayout()
+//                    val newsArticles = newsViewModel.newsPager.collectAsLazyPagingItems()
+//                    LazyColumn(Modifier.fillMaxSize()) {
+//                        items(newsArticles.itemCount) {
+//                            NewsCard(newsArticles[it]!!)
+//                        }
+//                    }
+                    val tourists = touristViewModel.tourists.collectAsLazyPagingItems()
                     LazyColumn(Modifier.fillMaxSize()) {
-                        items(newsArticles.itemCount) {
-                            NewsCard(newsArticles[it]!!)
+                        items(tourists.itemCount) {
+                            TouristProfileCard(tourist = tourists[it]!!)
                         }
                     }
+
                 }
 
             }
