@@ -1,4 +1,4 @@
-package com.mogaka.touristnews.data
+package com.mogaka.touristnews.data.models
 
 import com.squareup.moshi.Json
 

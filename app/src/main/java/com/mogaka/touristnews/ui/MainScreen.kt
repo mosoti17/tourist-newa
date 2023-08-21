@@ -78,24 +78,16 @@ fun TabContent(
         when (index) {
             0 -> {
                 val newsArticles = newsViewModel.newsPager.collectAsLazyPagingItems()
-                LazyColumn(Modifier.fillMaxSize()) {
-                    items(newsArticles.itemCount) {
-                        NewsCard(newsArticles[it]!!)
-                    }
-                }
+                NewsScreen(newsArticles)
             }
 
             1 -> {
                 val tourists = touristViewModel.tourists.collectAsLazyPagingItems()
-                LazyColumn(Modifier.fillMaxSize()) {
-                    items(tourists.itemCount) {
-                        TouristProfileCard(tourist = tourists[it]!!)
-                    }
-                }
+                TouristScreen(tourists)
             }
-
         }
 
     }
 
 }
+

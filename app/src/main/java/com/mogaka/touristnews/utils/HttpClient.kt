@@ -1,7 +1,10 @@
 package com.mogaka.touristnews.utils
 
+import android.content.Context
+import okhttp3.Cache
 import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
+import java.io.File
 
 object HttpClient {
 
@@ -10,6 +13,7 @@ object HttpClient {
      * @return An instance of OkHttpClient.
      */
     fun create(): OkHttpClient {
+
         return OkHttpClient.Builder()
             .addInterceptor(LoggingInterceptor.create())
             .connectTimeout(API_CONNECT_TIMEOUT, TimeUnit.SECONDS)
