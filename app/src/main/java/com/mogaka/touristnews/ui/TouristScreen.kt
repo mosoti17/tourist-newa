@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,10 +23,12 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.mogaka.touristnews.data.models.Tourist
+import com.mogaka.touristnews.utils.Date
 
 @Composable
 fun TouristScreen(
-    tourists: LazyPagingItems<Tourist>
+    tourists: LazyPagingItems<Tourist>,
+    onNextButtonClicked: (Tourist) -> Unit,
 ) {
     val context = LocalContext.current
     LaunchedEffect(key1 = tourists.loadState) {
@@ -46,13 +49,13 @@ fun TouristScreen(
         } else {
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 items(tourists.itemCount) { i ->
                     val tourist = tourists[i]
                     if (tourist != null) {
-                        TouristCard(data = tourist)
+                        TouristCard(data = tourist, onNextButtonClicked)
                     }
 
                 }
@@ -66,24 +69,59 @@ fun TouristScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TouristCard(data: Tourist) {
+fun TouristCard(data: Tourist, onNextButtonClicked: (Tourist) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp), shape = RoundedCornerShape(6.dp)
+            .padding(12.dp), shape = RoundedCornerShape(6.dp),
+        onClick = {
+            onNextButtonClicked(data)
+        }
     ) {
         Column(
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(8.dp)
         ) {
             Text(
                 text = data.touristName ?: "",
-                style = MaterialTheme.typography.headlineMedium,
+                style = MaterialTheme.typography.titleMedium,
             )
             Text(
                 text = data.touristEmail,
                 style = MaterialTheme.typography.bodyMedium,
             )
         }
+    }
+}
+
+
+@Composable
+fun TouristDetails(tourist: Tourist) {
+    Column(
+        modifier = Modifier.fillMaxWidth().padding(16.dp ),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.Start
+    ) {
+        Text(
+            text = tourist.touristName ?: "",
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.padding(vertical = 4.dp)
+        )
+        Text(
+            text = tourist.touristEmail,
+            style = MaterialTheme.typography.bodySmall,
+            modifier = Modifier.padding(vertical = 4.dp)
+        )
+        Text(
+            text = "Location: ${tourist.touristLocation}",
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.padding(vertical = 4.dp)
+        )
+        Text(
+            text =  "Created on: ${ Date.toHumanReadable(tourist.createdat)}",
+            style = MaterialTheme.typography.bodySmall,
+            modifier = Modifier.padding(vertical = 4.dp)
+        )
     }
 }

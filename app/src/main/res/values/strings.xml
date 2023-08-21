@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Tourist News</string>
+    <string name="back_button">Back</string>
+    <string name="news_screen">News</string>
+    <string name="tourist_screen">Tourist</string>
+    <string name="tourist_details_screen">Tourist Details</string>
 </resources>

@@ -5,11 +5,11 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.room.Room
-import com.mogaka.touristnews.data.models.News
 import com.mogaka.touristnews.data.NewsRemoteMediator
-import com.mogaka.touristnews.data.models.Tourist
 import com.mogaka.touristnews.data.TouristRemoteMediator
 import com.mogaka.touristnews.data.local.TouristNewsDatabase
+import com.mogaka.touristnews.data.models.News
+import com.mogaka.touristnews.data.models.Tourist
 import com.mogaka.touristnews.network.NewsService
 import com.mogaka.touristnews.network.TouristService
 import com.mogaka.touristnews.utils.BASE_URL
@@ -20,6 +20,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
@@ -40,22 +41,22 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideHttpClient(): HttpClient {
-        return HttpClient
+    fun provideHttpClient(): OkHttpClient {
+        return HttpClient.create()
     }
 
     @Singleton
     @Provides
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .client(provideHttpClient().create())
+        .client(provideHttpClient())
         .addConverterFactory(MoshiConverterFactory.create(MoshiBuilder.create()))
         .build()
 
 
     @Provides
     @Singleton
-    fun provideBeerDatabase(@ApplicationContext context: Context): TouristNewsDatabase {
+    fun provideTouristNewsDatabase(@ApplicationContext context: Context): TouristNewsDatabase {
         return Room.databaseBuilder(
             context,
             TouristNewsDatabase::class.java,

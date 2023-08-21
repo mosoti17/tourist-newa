@@ -6,6 +6,7 @@ import com.mogaka.touristnews.data.models.User
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import java.time.LocalDateTime
 
 class Converters {
     val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
@@ -40,5 +41,15 @@ class Converters {
 
         val adapter = moshi.adapter(List::class.java)
         return adapter.toJson(multiMedia)
+    }
+
+    @TypeConverter
+    fun fromTimestamp(value: String?): LocalDateTime? {
+        return value?.let { LocalDateTime.parse(it) }
+    }
+
+    @TypeConverter
+    fun dateToTimestamp(date: LocalDateTime?): String? {
+        return date?.toString()
     }
 }

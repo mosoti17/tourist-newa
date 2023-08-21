@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.cachedIn
 import com.mogaka.touristnews.data.models.Tourist
+import com.mogaka.touristnews.network.TouristService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -13,4 +14,6 @@ class TouristViewModel @Inject constructor(pager: Pager<Int, Tourist>) : ViewMod
     val tourists = pager
         .flow
         .cachedIn(viewModelScope)
+
+
 }

@@ -3,6 +3,7 @@ package com.mogaka.touristnews.data.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
+import java.time.LocalDateTime
 
 @Entity
 data class News(
@@ -19,7 +20,7 @@ data class News(
     @Json(name = "multiMedia")
     var multiMedia: List<MultiMedia> = listOf(),
     @Json(name = "createdat")
-    var createdat: String? = null,
+    var createdat: LocalDateTime? = null,
     @Json(name = "user")
     var user: User,
     @Json(name = "commentCount")

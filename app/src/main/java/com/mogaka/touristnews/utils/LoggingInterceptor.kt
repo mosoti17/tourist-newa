@@ -1,5 +1,6 @@
 package com.mogaka.touristnews.utils
 
+
 import okhttp3.logging.HttpLoggingInterceptor
 
 object LoggingInterceptor {

@@ -1,9 +1,13 @@
 package com.mogaka.touristnews.data.models
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
-import java.util.Date
+import kotlinx.parcelize.Parcelize
+import java.time.LocalDateTime
+
+@Parcelize
 @Entity
 data class Tourist(
     @PrimaryKey(autoGenerate = false)
@@ -17,5 +21,5 @@ data class Tourist(
     @Json(name = "tourist_location")
     var touristLocation: String,
     @Json(name = "createdat")
-    var createdat: String? = null
-)
+    var createdat: LocalDateTime? = null
+) : Parcelable
