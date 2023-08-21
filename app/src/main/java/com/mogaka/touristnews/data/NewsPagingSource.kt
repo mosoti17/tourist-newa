@@ -1,9 +1,7 @@
-package com.mogaka.touristnews
+package com.mogaka.touristnews.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.mogaka.touristnews.data.ApiResponse
-import com.mogaka.touristnews.data.News
 import com.mogaka.touristnews.network.NewsService
 import retrofit2.HttpException
 import java.io.IOException

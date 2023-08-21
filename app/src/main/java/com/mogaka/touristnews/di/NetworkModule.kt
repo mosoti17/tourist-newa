@@ -22,16 +22,22 @@ class NetworkModule {
     fun providesNewsService(retrofit: Retrofit): NewsService =
         retrofit.create(NewsService::class.java)
 
-    @Singleton
+
     @Provides
     fun providesTouristService(retrofit: Retrofit): TouristService =
         retrofit.create(TouristService::class.java)
 
     @Singleton
     @Provides
+    fun provideHttpClient(): HttpClient {
+        return HttpClient
+    }
+
+    @Singleton
+    @Provides
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .client(HttpClient.create())
+        .client(provideHttpClient().create())
         .addConverterFactory(MoshiConverterFactory.create(MoshiBuilder.create()))
         .build()
 }

@@ -69,6 +69,8 @@ dependencies {
     implementation("androidx.paging:paging-runtime-ktx:3.2.0")
     implementation("androidx.paging:paging-compose:3.2.0")
     implementation("com.google.android.material:material:1.9.0")
+   // implementation("androidx.compose.foundation:foundation:1.5.0")
+
 
     kapt("com.google.dagger:hilt-android-compiler:2.44")
 

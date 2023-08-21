@@ -1,9 +1,10 @@
-package com.mogaka.touristnews
+package com.mogaka.touristnews.data.repo
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.mogaka.touristnews.data.Tourist
+import com.mogaka.touristnews.data.TouristPagingSource
 import com.mogaka.touristnews.network.TouristService
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
