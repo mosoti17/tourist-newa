@@ -7,6 +7,7 @@ import com.squareup.moshi.Json
 @Entity
 data class News(
     @PrimaryKey(autoGenerate = true)
+    var pagingId: Int? = null,
     @Json(name = "id")
     var id: Int,
     @Json(name = "title")

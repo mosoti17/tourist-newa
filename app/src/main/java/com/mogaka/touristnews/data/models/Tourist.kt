@@ -7,6 +7,7 @@ import java.util.Date
 @Entity
 data class Tourist(
     @PrimaryKey(autoGenerate = false)
+    var pagingId: Int? = null,
     @Json(name = "id")
     var id: Int,
     @Json(name = "tourist_name")

@@ -16,7 +16,7 @@ class NewsRemoteMediator(
     private val db: TouristNewsDatabase,
     private val newsService: NewsService
 ) : RemoteMediator<Int, News>() {
-    private var nextKey = 0
+
     override suspend fun load(loadType: LoadType, state: PagingState<Int, News>): MediatorResult {
         try {
             val loadKey = when (loadType) {
@@ -33,12 +33,13 @@ class NewsRemoteMediator(
                     if(lastItem == null) {
                         1
                     } else {
-                       nextKey
+                        (lastItem.pagingId!! / state.config.pageSize) + 1
+
                     }
                 }
             }
             val newsArticlesResponse = newsService.getFeeds(loadKey)
-            nextKey = newsArticlesResponse.page + 1
+
             db.withTransaction {
                 if (loadType == LoadType.REFRESH) {
                     db.newsDao.clearAll()

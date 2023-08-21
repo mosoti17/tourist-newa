@@ -33,7 +33,7 @@ class TouristRemoteMediator(
                     if(lastItem == null) {
                         1
                     } else {
-                       nextKey
+                        (lastItem.pagingId!! / state.config.pageSize) + 1
                     }
                 }
             }
