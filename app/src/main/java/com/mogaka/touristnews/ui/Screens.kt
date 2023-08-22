@@ -3,6 +3,9 @@ package com.mogaka.touristnews.ui
 import androidx.annotation.StringRes
 import com.mogaka.touristnews.R
 
+/**
+ * Maintains all destinations on the application
+ */
 enum class Screens(@StringRes val title: Int) {
     Start(title = R.string.app_name),
     News(title = R.string.news_screen),

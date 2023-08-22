@@ -6,6 +6,9 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 
+/**
+ * Custom parser to convert dates to local date time String to local date time
+ */
 class LocalDateTimeAdapter {
 
     @ToJson

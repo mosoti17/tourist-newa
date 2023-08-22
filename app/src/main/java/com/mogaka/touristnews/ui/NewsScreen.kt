@@ -32,7 +32,6 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
@@ -55,7 +54,7 @@ fun NewsScreen(
             Toast.makeText(
                 context,
                 "Error: " + (newsArticles.loadState.refresh as LoadState.Error).error.message,
-                Toast.LENGTH_LONG
+                Toast.LENGTH_SHORT
             ).show()
         }
     }
@@ -172,7 +171,7 @@ fun ImagePager(news: News) {
             AsyncImage(
                 model = imageRequest,
                 contentDescription = news.title ?: "",
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.Fit,
                 modifier = Modifier.aspectRatio(1.6f)
             )
         }

@@ -15,6 +15,7 @@ import com.mogaka.touristnews.network.TouristService
 import com.mogaka.touristnews.utils.BASE_URL
 import com.mogaka.touristnews.utils.HttpClient
 import com.mogaka.touristnews.utils.MoshiBuilder
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,10 +48,16 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideMoshi(): Moshi {
+        return MoshiBuilder.create()
+    }
+
+    @Singleton
+    @Provides
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .client(provideHttpClient())
-        .addConverterFactory(MoshiConverterFactory.create(MoshiBuilder.create()))
+        .addConverterFactory(MoshiConverterFactory.create(provideMoshi()))
         .build()
 
 

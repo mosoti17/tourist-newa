@@ -1,6 +1,5 @@
 package com.mogaka.touristnews.ui
 
-import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,7 +18,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -78,6 +76,9 @@ fun MainScreen(
         }
 
     ) { innerPadding ->
+        /**
+        Manage navigation from a central point to make refactoring easier
+         */
         NavHost(
             navController = navController,
             startDestination = Screens.Start.name,
@@ -96,6 +97,11 @@ fun MainScreen(
                         newsViewModel,
                         touristViewModel,
                         onNextButtonClicked = {
+                            /*
+                            Pass the Tourist details to the details page because the respose for tourist
+                            details is the same. Saves the extra network call and allows details to be viewed
+                            when offline
+                             */
                             navController.currentBackStackEntry?.savedStateHandle?.set(
                                 "data",
                                 it
