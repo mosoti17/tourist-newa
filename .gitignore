@@ -42,3 +42,5 @@ captures/
 report.xml
 /buildSrc/build/
 /keystore.properties
+/gradlew
+/gradlew.bat
